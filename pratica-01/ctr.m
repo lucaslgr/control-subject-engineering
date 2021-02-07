@@ -126,20 +126,20 @@ sim('PIDcontinuos_01') % Para T=0.1s
 sim('PIDcontinuos_0001') % Para T=0.001s
 
 %Extraindo os valores de resposta do sistema controlado p/ T = 0,001
-resp_controlled_PID_ZN_continuo_T01 = resp_controledPID_ZNandCC_01continuo.signals.values(:,1);
-resp_controlled_PID_CC_continuo_T01 = resp_controledPID_ZNandCC_01continuo.signals.values(:,2);
+resp_controlled_PID_ZN_continuos_T01 = resp_controlledPID_ZNandCC_01continuos.signals.values(:,1);
+resp_controlled_PID_CC_continuos_T01 = resp_controlledPID_ZNandCC_01continuos.signals.values(:,2);
 
 %Extraindo os valores de resposta do sistema controlado p/ T = 0,001
-resp_controlled_PID_ZN_continuo_T0001 = resp_controledPID_ZNandCC_0001continuo.signals.values(:,1);
-resp_controlled_PID_CC_continuo_T0001 = resp_controledPID_ZNandCC_0001continuo.signals.values(:,2);
+resp_controlled_PID_ZN_continuos_T0001 = resp_controlledPID_ZNandCC_0001continuos.signals.values(:,1);
+resp_controlled_PID_CC_continuos_T0001 = resp_controlledPID_ZNandCC_0001continuos.signals.values(:,2);
 
 %%%<Plotando os gr�ficos da Figura 2>
 figure(2)
 %Sintonizado por ZN
-plot(resp_controledPID_ZNandCC_0001continuo.time, resp_controlled_PID_ZN_continuo_T0001, 'g')
+plot(resp_controlledPID_ZNandCC_0001continuos.time, resp_controlled_PID_ZN_continuos_T0001, 'g')
 hold on
 %Sintonizado por CC
-plot(resp_controledPID_ZNandCC_0001continuo.time, resp_controlled_PID_CC_continuo_T0001, 'k')
+plot(resp_controlledPID_ZNandCC_0001continuos.time, resp_controlled_PID_CC_continuos_T0001, 'k')
 title('Reposta malha fechada com PID continuo sintonia ZN x CC p/ T=0.001s');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 hold off
@@ -147,10 +147,10 @@ hold off
 %%%<Plotando os gr�ficos da Figura 3>
 figure(3)
 %Sintonizado por ZN
-plot(resp_controledPID_ZNandCC_01continuo.time, resp_controlled_PID_ZN_continuo_T01, 'g')
+plot(resp_controlledPID_ZNandCC_01continuos.time, resp_controlled_PID_ZN_continuos_T01, 'g')
 hold on
 %Sintonizado por CC
-plot(resp_controledPID_ZNandCC_01continuo.time, resp_controlled_PID_CC_continuo_T01, 'k')
+plot(resp_controlledPID_ZNandCC_01continuos.time, resp_controlled_PID_CC_continuos_T01, 'k')
 title('Reposta malha fechada com PID continuo sintonia ZN x CC p/ T=0.1s');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 hold off
@@ -169,22 +169,22 @@ Ezn_q = 0; Ecc_q = 0;
 Ezn_qt = 0; Ecc_qt = 0;
 
 %C�lculo dos erros
-for i=1:length(resp_controledPID_ZNandCC_0001continuo.time)
+for i=1:length(resp_controlledPID_ZNandCC_0001continuos.time)
    %Integral do erro absoluto (IAE)
-   Ezn_a = Ezn_a + abs(1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,1));
-   Ecc_a = Ecc_a + abs(1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,2));
+   Ezn_a = Ezn_a + abs(1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1));
+   Ecc_a = Ecc_a + abs(1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2));
    
    %Integral do erro absoluto ponderado pelo tempo (ITAE)
-   Ezn_at = Ezn_at + abs((1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,1))*resp_controledPID_ZNandCC_0001continuo.time(i));
-   Ecc_at = Ecc_at + abs((1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,2))*resp_controledPID_ZNandCC_0001continuo.time(i));
+   Ezn_at = Ezn_at + abs((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_0001continuos.time(i));
+   Ecc_at = Ecc_at + abs((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_0001continuos.time(i));
     
    %Integral do erro quadr�tico (ISE)
-   Ezn_q = Ezn_q + (1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,1))^2;
-   Ecc_q = Ecc_q + (1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,2))^2;
+   Ezn_q = Ezn_q + (1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))^2;
+   Ecc_q = Ecc_q + (1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))^2;
    
    %Integral do erro quadr�tico ponderado pelo tempo (ITSE)
-   Ezn_qt = Ezn_qt + ((1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,1))*resp_controledPID_ZNandCC_0001continuo.time(i))^2;
-   Ecc_qt = Ecc_qt + ((1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,2))*resp_controledPID_ZNandCC_0001continuo.time(i))^2;
+   Ezn_qt = Ezn_qt + ((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_0001continuos.time(i))^2;
+   Ecc_qt = Ecc_qt + ((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_0001continuos.time(i))^2;
 end
 
 Erros = [Ezn_a Ecc_a
@@ -210,42 +210,42 @@ Montando a tf G(s) do controlador para discretiz�-la pelo m�todo de Tustin
 em T=0.1s e T=0.001s
 OBS: Estamos utilizando um filtro passa-baixa
 %}
-G_controlador_zn = tf([kp_ZN+kd_ZN 20*kp_ZN+ki_ZN 20*ki_ZN],[1 20 0]);
-G_controlador_cc = tf([kp_CC+kd_CC 20*kp_CC+ki_CC 20*ki_CC],[1 20 0]);
+G_controller_zn = tf([kp_ZN+kd_ZN 20*kp_ZN+ki_ZN 20*ki_ZN],[1 20 0]);
+G_controller_cc = tf([kp_CC+kd_CC 20*kp_CC+ki_CC 20*ki_CC],[1 20 0]);
 
 %Discretiza��o do controlador G(z) pelo m�todo de Tustin
-Gcontrolador_discretizadaTUSTIN_T01_controlador_zn = c2d(G_controlador_zn, 0.1, 'Tustin');
-Gcontrolador_discretizadaTUSTIN_T0001_controlador_zn = c2d(G_controlador_zn, 0.001, 'Tustin');
-Gcontrolador_discretizadaTUSTIN_T01_controlador_cc = c2d(G_controlador_cc, 0.1, 'Tustin');
-Gcontrolador_discretizadaTUSTIN_T0001_controlador_cc = c2d(G_controlador_cc, 0.001, 'Tustin');
+Gcontroller_discreetizedTUSTIN_T01_controller_zn = c2d(G_controller_zn, 0.1, 'Tustin');
+Gcontroller_discreetizedTUSTIN_T0001_controller_zn = c2d(G_controller_zn, 0.001, 'Tustin');
+Gcontroller_discreetizedTUSTIN_T01_controller_cc = c2d(G_controller_cc, 0.1, 'Tustin');
+Gcontroller_discreetizedTUSTIN_T0001_controller_cc = c2d(G_controller_cc, 0.001, 'Tustin');
 
 %Chamando o diagrama de bloco que aplica os PID's discretos na planta cada
 %cada frequ�cia diferente
-sim('PIDdiscreto_01'); %Para T=0,1s
-sim('PIDdiscreto_0001'); %Para T=0,001s
+sim('PIDdiscret_01'); %Para T=0,1s
+sim('PIDdiscret_0001'); %Para T=0,001s
 
 %Extraindo os valores de resposta do sistema controlado p/ T = 0,001
-resp_controlled_PID_ZN_discreto_T01 = resp_controledPID_ZNandCC_01discreto.signals.values(:,1);
-resp_controlled_PID_CC_discreto_T01 = resp_controledPID_ZNandCC_01discreto.signals.values(:,2);
+resp_controlled_PID_ZN_discret_T01 = resp_controlledPID_ZNandCC_01discret.signals.values(:,1);
+resp_controlled_PID_CC_discret_T01 = resp_controlledPID_ZNandCC_01discret.signals.values(:,2);
 
 %Extraindo os valores de resposta do sistema controlado p/ T = 0,001
-resp_controlled_PID_ZN_discreto_T0001 = resp_controledPID_ZNandCC_0001discreto.signals.values(:,1);
-resp_controlled_PID_CC_discreto_T0001 = resp_controledPID_ZNandCC_0001discreto.signals.values(:,2);
+resp_controlled_PID_ZN_discret_T0001 = resp_controlledPID_ZNandCC_0001discret.signals.values(:,1);
+resp_controlled_PID_CC_discret_T0001 = resp_controlledPID_ZNandCC_0001discret.signals.values(:,2);
 
 %Plotando os gr�ficos da planta controlada pelos controladores discretizados e sintonizados por ZN e CC nos tempos 
 %de amostragem de 0.1 0.001 G(z)
 %%====<T=0.1s>======
 figure(5)
-plot(resp_controledPID_ZNandCC_01discreto.time, resp_controlled_PID_ZN_discreto_T01, 'b')
+plot(resp_controlledPID_ZNandCC_01discret.time, resp_controlled_PID_ZN_discret_T01, 'b')
 hold on
-plot(resp_controledPID_ZNandCC_01discreto.time, resp_controlled_PID_CC_discreto_T01, 'k')
+plot(resp_controlledPID_ZNandCC_01discret.time, resp_controlled_PID_CC_discret_T01, 'k')
 title('Reposta malha fechada com PID discreto sintonia ZN x CC p/ T=0.1s');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 %%====<T=0.001s>=====
 figure(6)
-plot(resp_controledPID_ZNandCC_0001discreto.time, resp_controlled_PID_ZN_discreto_T0001, 'c')
+plot(resp_controlledPID_ZNandCC_0001discret.time, resp_controlled_PID_ZN_discret_T0001, 'c')
 hold on
-plot(resp_controledPID_ZNandCC_0001discreto.time, resp_controlled_PID_CC_discreto_T0001, 'm')
+plot(resp_controlledPID_ZNandCC_0001discret.time, resp_controlled_PID_CC_discret_T0001, 'm')
 title('Reposta malha fechada com PID discreto sintonia ZN x CC p/ T=0.001s');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 hold off

@@ -1,5 +1,5 @@
 Model {
-  Name			  "contr3PIDdiscreto_0001"
+  Name			  "PIDdiscret_0001"
   Version		  8.5
   MdlSubVersion		  0
   SavedCharacterEncoding  "windows-1252"
@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.23"
+    ComputedModelVersion    "1.24"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "contr3PIDdiscreto_0001"
+      Cell		      "PIDdiscret_0001"
       PropName		      "mdlProps"
     }
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Mar 13 13:31:18 2020"
-  RTWModifiedTimeStamp	  506007077
-  ModelVersionFormat	  "1.%<AutoIncrement:23>"
+  LastModifiedDate	  "Sun Feb 07 11:14:03 2021"
+  RTWModifiedTimeStamp	  534593640
+  ModelVersionFormat	  "1.%<AutoIncrement:24>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -893,7 +893,7 @@ Model {
     }
   }
   System {
-    Name		    "contr3PIDdiscreto_0001"
+    Name		    "PIDdiscret_0001"
     Location		    [388, 0, 1373, 775]
     Open		    on
     ModelBrowserVisibility  off
@@ -1015,7 +1015,7 @@ Model {
       Ports		      [1]
       Position		      [555, 69, 770, 131]
       ZOrder		      24
-      VariableName	      "resp_controledPID_ZNandCC_0001discreto"
+      VariableName	      "resp_controlledPID_ZNandCC_0001discret"
       MaxDataPoints	      "inf"
       SaveFormat	      "Structure With Time"
       Save2DSignal	      "3-D array (concatenate along third dimension)"

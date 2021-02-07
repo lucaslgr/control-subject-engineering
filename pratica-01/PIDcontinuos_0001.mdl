@@ -1,5 +1,5 @@
 Model {
-  Name			  "contr3_PIDcontinuos"
+  Name			  "PIDcontinuos_0001"
   Version		  8.5
   MdlSubVersion		  0
   SavedCharacterEncoding  "windows-1252"
@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.11"
+    ComputedModelVersion    "1.12"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "contr3_PIDcontinuos"
+      Cell		      "PIDcontinuos_0001"
       PropName		      "mdlProps"
     }
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [54.0, 0.0, 1320.0, 784.0]
+      Location		      [1426.0, 171.0, 1320.0, 784.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Mar 13 18:21:04 2020"
-  RTWModifiedTimeStamp	  506024464
-  ModelVersionFormat	  "1.%<AutoIncrement:11>"
+  LastModifiedDate	  "Sun Feb 07 11:13:08 2021"
+  RTWModifiedTimeStamp	  534593321
+  ModelVersionFormat	  "1.%<AutoIncrement:12>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -891,8 +891,8 @@ Model {
     }
   }
   System {
-    Name		    "contr3_PIDcontinuos"
-    Location		    [54, 0, 1374, 784]
+    Name		    "PIDcontinuos_0001"
+    Location		    [1426, 171, 2746, 955]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1117,7 +1117,7 @@ Model {
       Ports		      [1]
       Position		      [650, 75, 880, 115]
       ZOrder		      24
-      VariableName	      "resp_controledPID_ZNandCC_0001continuo"
+      VariableName	      "resp_controlledPID_ZNandCC_0001continuos"
       MaxDataPoints	      "inf"
       SaveFormat	      "Structure With Time"
       Save2DSignal	      "3-D array (concatenate along third dimension)"
