@@ -1,0 +1,256 @@
+clear all
+close all
+clc
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PRATICA 01 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%{
+Dada a fun��o de transfer�ncia abaixo, determine:
+
+G(S) = 6 / (s^2 + 9s + 9)
+
+1. Controle o sistema representado pela fun��o de transfer�ncia acima pelo 
+m�todo de identifica��o de Smith atrav�s de um controlador PID cont�nuo de
+Ziegler-Nichols e CohenCoon.
+
+2. Dicretize os dois controladores PID encontrados atrav�s do m�todo de 
+discretiza��o de Tustin, abordado na teoria, para 2 frequ�ncias de 
+amostragem: 0.1 e 0.001 segundos. Lembre-se de utilizar um filtro 
+passa-baixa!
+
+3. Confeccione um relat�rio descrevendo estas situa��es, realizando 
+compara��es entre o sistema controlado pelo PID cont�nuo e discreto.
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Q1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%Parte1
+%{
+Pegando a fun��o de transfer�ncia real da planta dando uma entrada degrau por 7 
+segundos com passo de T=0,0001s e salvando os dados de sa�daXtempo na 
+estrutura resp.
+%}
+sim('FTreal')
+x_real = resp.time;
+y_real = resp.signals.values;
+
+%%%Parte2 
+%{
+Ap�s identificar que o sistema cresce ou decresce linearmente ap�s o
+atraso de transporte e estabiliza em um valor, podemos considerar que o
+sistema � monot�nico e sendo monot�nico podemos aproxim�-lo de uma sistema
+de primeiro grau atrav�s do m�todo de SMITH.
+Aplicando o m�todo de curva de rea��o e an�lise por m�todo de Smith para 
+aproximar a planta de uma G(s) de primeira ordem.
+- 1� Encontrar Tal: constante de tempo do sistema
+- 2� Encontrar L: atraso de transporte do sistema.
+- 3� Encontrar o K: constante de ganho est�tico do sistema.
+- 4� Montar a G(s) aproximada de 1� ordem com os valores acima
+%}
+% 28,3% do valor que o sistema estabiliza
+amp_28 = y_real(end)*0.283;
+% 63,2% do valor que o sistema estabiliza
+amp_63 = y_real(end)*0.632;
+%c�lculo do K que � o ganho est�tico do sistema deltaY/deltaU
+K = (y_real(end) - y_real(1))/(input.signals.values(end) - 0);
+
+% definindo uma toler�ncia de erro para encontrar os valores de tempo
+% correspondentes a amp_28 e amp_63
+tolerance1 = 0.0001;
+
+%loop para buscar o valor de tempo correspondente aos valores de amp_28
+%(28,3%) e amp_63(63,2%)
+for i=1:length(y_real)
+    if((y_real(i)>=amp_28-tolerance1) && (y_real(i)<=amp_28+tolerance1))
+        t1_28 = x_real(i)
+        y_real(i)
+    end
+    if((y_real(i)>=amp_63-tolerance1) && (y_real(i)<=amp_63+tolerance1))
+        t2_63 = x_real(i)
+        y_real(i)
+    end
+end
+
+%Calculando as constantes L e T
+T = 1.5*(t2_63 - t1_28);
+L = 1.5*(t1_28 - (t2_63/3));
+%Montando o sistema aproximado de 1� grau atrav�s do m�todo de SMITH
+sim('FTaprox')
+x_aprox = resp_aprox.time;
+y_aprox = resp_aprox.signals.values;
+
+%%%<Plotando os gr�ficos da Figura 1>
+figure(1)
+%%%primeiro usando a fun��o de transfer�ncia real da planta
+plot(x_real, y_real, 'b')
+hold on
+%%%segundo usando a aproximada obtida atrav�s do m�todo de Smith
+plot(x_aprox, y_aprox, 'r')
+title('G(s) Real x G(s) Aproximada');
+legend('Real', 'Aproximada por Curva de Rea��o|SMITH');
+hold off
+
+%%%Parte 3
+%{
+Aplicando o m�todo de sintoniza��o de Ziegler e Nichols para encontrar 
+valores de Kp, Ki e Kd para o PID.
+%}
+kp_ZN = 1.2*T/L;
+ti_ZN = 2*L;
+ki_ZN = kp_ZN/ti_ZN;
+td_ZN = 0.5*L;
+kd_ZN = kp_ZN*td_ZN;
+
+%{
+Aplicando o m�todo de sincroniza��o de Cohen-Coon para encontrar 
+Kp, Ki, e Kd. OBS: No m�todo de Cohen Coon precisamos da constante R que � 
+R = L/Tal
+%}
+R = L/T;
+kp_CC = T/(L*(4/3 + R/4));
+ti_CC = L*((32+6*R)/(13+8*R));
+ki_CC = kp_CC/ti_CC;
+td_CC = 4/(13+8*R);
+kd_CC = kp_CC*td_CC;
+
+%Valores encontrados por cada m�todo
+ZN = [kp_ZN ki_ZN kd_ZN]
+CC = [kp_CC ki_CC kd_CC]
+
+%%%Parte 4
+%{
+Controlando a planta com PID cont�nuo sintonizado atrav�s dos m�todos ZN e 
+CC
+%}
+sim('PIDcontinuos_01') % Para T=0.1s
+sim('PIDcontinuos_0001') % Para T=0.001s
+
+%Extraindo os valores de resposta do sistema controlado p/ T = 0,001
+resp_controlled_PID_ZN_continuo_T01 = resp_controledPID_ZNandCC_01continuo.signals.values(:,1);
+resp_controlled_PID_CC_continuo_T01 = resp_controledPID_ZNandCC_01continuo.signals.values(:,2);
+
+%Extraindo os valores de resposta do sistema controlado p/ T = 0,001
+resp_controlled_PID_ZN_continuo_T0001 = resp_controledPID_ZNandCC_0001continuo.signals.values(:,1);
+resp_controlled_PID_CC_continuo_T0001 = resp_controledPID_ZNandCC_0001continuo.signals.values(:,2);
+
+%%%<Plotando os gr�ficos da Figura 2>
+figure(2)
+%Sintonizado por ZN
+plot(resp_controledPID_ZNandCC_0001continuo.time, resp_controlled_PID_ZN_continuo_T0001, 'g')
+hold on
+%Sintonizado por CC
+plot(resp_controledPID_ZNandCC_0001continuo.time, resp_controlled_PID_CC_continuo_T0001, 'k')
+title('Reposta malha fechada com PID continuo sintonia ZN x CC p/ T=0.001s');
+legend('Ziegler-Nichols', 'Cohen-Coon');
+hold off
+
+%%%<Plotando os gr�ficos da Figura 3>
+figure(3)
+%Sintonizado por ZN
+plot(resp_controledPID_ZNandCC_01continuo.time, resp_controlled_PID_ZN_continuo_T01, 'g')
+hold on
+%Sintonizado por CC
+plot(resp_controledPID_ZNandCC_01continuo.time, resp_controlled_PID_CC_continuo_T01, 'k')
+title('Reposta malha fechada com PID continuo sintonia ZN x CC p/ T=0.1s');
+legend('Ziegler-Nichols', 'Cohen-Coon');
+hold off
+
+%%%Parte 5
+%{
+Calculando erros Absoluto, Absoluto Temporal, Quadr�tico, Quadr�tico
+Temporal para o controle PID cont�nuo sintonizado pelo m�todo de 
+Ziegles-Nichols e Cohen-Coon.
+%}
+
+%Declara��o das vari�veis para c�lculo do somat�rio dos erros
+Ezn_a = 0; Ecc_a = 0;
+Ezn_at = 0; Ecc_at = 0;
+Ezn_q = 0; Ecc_q = 0;
+Ezn_qt = 0; Ecc_qt = 0;
+
+%C�lculo dos erros
+for i=1:length(resp_controledPID_ZNandCC_0001continuo.time)
+   %Integral do erro absoluto (IAE)
+   Ezn_a = Ezn_a + abs(1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,1));
+   Ecc_a = Ecc_a + abs(1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,2));
+   
+   %Integral do erro absoluto ponderado pelo tempo (ITAE)
+   Ezn_at = Ezn_at + abs((1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,1))*resp_controledPID_ZNandCC_0001continuo.time(i));
+   Ecc_at = Ecc_at + abs((1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,2))*resp_controledPID_ZNandCC_0001continuo.time(i));
+    
+   %Integral do erro quadr�tico (ISE)
+   Ezn_q = Ezn_q + (1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,1))^2;
+   Ecc_q = Ecc_q + (1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,2))^2;
+   
+   %Integral do erro quadr�tico ponderado pelo tempo (ITSE)
+   Ezn_qt = Ezn_qt + ((1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,1))*resp_controledPID_ZNandCC_0001continuo.time(i))^2;
+   Ecc_qt = Ecc_qt + ((1 - resp_controledPID_ZNandCC_0001continuo.signals.values(i,2))*resp_controledPID_ZNandCC_0001continuo.time(i))^2;
+end
+
+Erros = [Ezn_a Ecc_a
+        Ezn_at Ecc_at
+        Ezn_q  Ecc_q
+        Ezn_qt Ecc_qt];
+    
+%%%<Plotando os gr�ficos da Figura 4>
+%%%Erros acumulativos por 4 m�todos de diferentes
+figure(4)
+bar(Erros);
+xNames = {'Absoluto';'Absoluto Temporal';'Quadr�tico';'Quadr�tico Temporal'};
+title('Somat�rio dos Erros p/ T=0.001s');
+legend('Ziegler-Nichols', 'Cohen-Coon');
+set(gca,'xticklabel',xNames)
+hold off
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Q2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%Parte1
+%{
+Montando a tf G(s) do controlador para discretiz�-la pelo m�todo de Tustin
+em T=0.1s e T=0.001s
+OBS: Estamos utilizando um filtro passa-baixa
+%}
+G_controlador_zn = tf([kp_ZN+kd_ZN 20*kp_ZN+ki_ZN 20*ki_ZN],[1 20 0]);
+G_controlador_cc = tf([kp_CC+kd_CC 20*kp_CC+ki_CC 20*ki_CC],[1 20 0]);
+
+%Discretiza��o do controlador G(z) pelo m�todo de Tustin
+Gcontrolador_discretizadaTUSTIN_T01_controlador_zn = c2d(G_controlador_zn, 0.1, 'Tustin');
+Gcontrolador_discretizadaTUSTIN_T0001_controlador_zn = c2d(G_controlador_zn, 0.001, 'Tustin');
+Gcontrolador_discretizadaTUSTIN_T01_controlador_cc = c2d(G_controlador_cc, 0.1, 'Tustin');
+Gcontrolador_discretizadaTUSTIN_T0001_controlador_cc = c2d(G_controlador_cc, 0.001, 'Tustin');
+
+%Chamando o diagrama de bloco que aplica os PID's discretos na planta cada
+%cada frequ�cia diferente
+sim('PIDdiscreto_01'); %Para T=0,1s
+sim('PIDdiscreto_0001'); %Para T=0,001s
+
+%Extraindo os valores de resposta do sistema controlado p/ T = 0,001
+resp_controlled_PID_ZN_discreto_T01 = resp_controledPID_ZNandCC_01discreto.signals.values(:,1);
+resp_controlled_PID_CC_discreto_T01 = resp_controledPID_ZNandCC_01discreto.signals.values(:,2);
+
+%Extraindo os valores de resposta do sistema controlado p/ T = 0,001
+resp_controlled_PID_ZN_discreto_T0001 = resp_controledPID_ZNandCC_0001discreto.signals.values(:,1);
+resp_controlled_PID_CC_discreto_T0001 = resp_controledPID_ZNandCC_0001discreto.signals.values(:,2);
+
+%Plotando os gr�ficos da planta controlada pelos controladores discretizados e sintonizados por ZN e CC nos tempos 
+%de amostragem de 0.1 0.001 G(z)
+%%====<T=0.1s>======
+figure(5)
+plot(resp_controledPID_ZNandCC_01discreto.time, resp_controlled_PID_ZN_discreto_T01, 'b')
+hold on
+plot(resp_controledPID_ZNandCC_01discreto.time, resp_controlled_PID_CC_discreto_T01, 'k')
+title('Reposta malha fechada com PID discreto sintonia ZN x CC p/ T=0.1s');
+legend('Ziegler-Nichols', 'Cohen-Coon');
+%%====<T=0.001s>=====
+figure(6)
+plot(resp_controledPID_ZNandCC_0001discreto.time, resp_controlled_PID_ZN_discreto_T0001, 'c')
+hold on
+plot(resp_controledPID_ZNandCC_0001discreto.time, resp_controlled_PID_CC_discreto_T0001, 'm')
+title('Reposta malha fechada com PID discreto sintonia ZN x CC p/ T=0.001s');
+legend('Ziegler-Nichols', 'Cohen-Coon');
+hold off
+
+
+
+
+
