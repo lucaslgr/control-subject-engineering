@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.24"
+    ComputedModelVersion    "1.25"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [388.0, 0.0, 985.0, 775.0]
+      Location		      [-8.0, -8.0, 1382.0, 784.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -64,9 +64,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[935.0, 600.0]
-	ZoomFactor		[0.8]
-	Offset			[2.4520532434208917, 27.829115201462685]
+	Extents			[1332.0, 609.0]
+	ZoomFactor		[1.75]
+	Offset			[71.96232963514764, 20.410820164618041]
       }
     }
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Feb 07 11:14:03 2021"
-  RTWModifiedTimeStamp	  534593640
-  ModelVersionFormat	  "1.%<AutoIncrement:24>"
+  LastModifiedDate	  "Wed Feb 17 01:04:46 2021"
+  RTWModifiedTimeStamp	  535421082
+  ModelVersionFormat	  "1.%<AutoIncrement:25>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -894,7 +894,7 @@ Model {
   }
   System {
     Name		    "PIDdiscret_0001"
-    Location		    [388, 0, 1373, 775]
+    Location		    [-8, -8, 1374, 776]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -906,9 +906,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "80"
+    ZoomFactor		    "175"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "27"
+    SIDHighWatermark	    "28"
     Block {
       BlockType		      DiscreteTransferFcn
       Name		      "Discrete\nTransfer Fcn"

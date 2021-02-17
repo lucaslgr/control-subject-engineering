@@ -9,7 +9,7 @@ Dada a funcao de transferencia abaixo, determine:
 G(S) = 6 / (s^2 + 9s + 9)
 
 1. Controle o sistema representado pela funcao de transferencia acima pelo 
-metodo de identificacao de Smith atravï¿½s de um controlador PID continuo de
+metodo de identificacao de Smith atraves de um controlador PID continuo de
 Ziegler-Nichols e CohenCoon.
 
 2. Dicretize os dois controladores PID encontrados atraves do metodo de 
@@ -44,7 +44,7 @@ Aplicando o metodo de curva de reacao e analise por metodo de Smith para
 aproximar a planta de uma G(s) de primeira ordem.
 - 1 Encontrar Tal: constante de tempo do sistema
 - 2 Encontrar L: atraso de transporte do sistema.
-- 3 Encontrar o K: constante de ganho estï¿½tico do sistema.
+- 3 Encontrar o K: constante de ganho estatico do sistema.
 - 4 Montar a G(s) aproximada de 1ï¿½ ordem com os valores acima
 %}
 % 28,3% do valor que o sistema estabiliza
@@ -54,7 +54,7 @@ amp_63 = y_real(end)*0.632;
 %calculo do K que eh o ganho estatico do sistema deltaY/deltaU
 K = (y_real(end) - y_real(1))/(input.signals.values(end) - 0);
 
-% definindo uma tolerï¿½ncia de erro para encontrar os valores de tempo
+% definindo uma tolerancia de erro para encontrar os valores de tempo
 % correspondentes a amp_28 e amp_63
 tolerance1 = 0.0001;
 
@@ -74,17 +74,17 @@ end
 %Calculando as constantes L e T
 T = 1.5*(t2_63 - t1_28);
 L = 1.5*(t1_28 - (t2_63/3));
-%Montando o sistema aproximado de 1ï¿½ grau atravï¿½s do mï¿½todo de SMITH
+%Montando o sistema aproximado de primeiro grau atraves do metodo de SMITH
 sim('FTaprox')
 x_aprox = resp_aprox.time;
 y_aprox = resp_aprox.signals.values;
 
-%%%<Plotando os grï¿½ficos da Figura 1>
+%%%<Plotando os graficos da Figura 1>
 figure(1)
 %%%primeiro usando a funcao de transferencia real da planta
 plot(x_real, y_real, 'b')
 hold on
-%%%segundo usando a aproximada obtida atravï¿½s do mï¿½todo de Smith
+%%%segundo usando a aproximada obtida atraves do metodo de Smith
 plot(x_aprox, y_aprox, 'r')
 title('G(s) Real x G(s) Aproximada');
 legend('Real', 'Aproximada por Curva de Reação|SMITH');
@@ -92,7 +92,7 @@ hold off
 
 %%%Parte 3
 %{
-Aplicando o mï¿½todo de sintonizaï¿½ï¿½o de Ziegler e Nichols para encontrar 
+Aplicando o metodo de sintonizaï¿½ï¿½o de Ziegler e Nichols para encontrar 
 valores de Kp, Ki e Kd para o PID.
 %}
 kp_ZN = 1.2*T/L;
@@ -102,8 +102,8 @@ td_ZN = 0.5*L;
 kd_ZN = kp_ZN*td_ZN;
 
 %{
-Aplicando o mï¿½todo de sincronizaï¿½ï¿½o de Cohen-Coon para encontrar 
-Kp, Ki, e Kd. OBS: No mï¿½todo de Cohen Coon precisamos da constante R que ï¿½ 
+Aplicando o metodo de sincronizacao de Cohen-Coon para encontrar 
+Kp, Ki, e Kd. OBS: No metodo de Cohen Coon precisamos da constante R que eh 
 R = L/Tal
 %}
 R = L/T;
@@ -113,13 +113,13 @@ ki_CC = kp_CC/ti_CC;
 td_CC = 4/(13+8*R);
 kd_CC = kp_CC*td_CC;
 
-%Valores encontrados por cada mï¿½todo
+%Valores encontrados por cada metodo
 ZN = [kp_ZN ki_ZN kd_ZN]
 CC = [kp_CC ki_CC kd_CC]
 
 %%%Parte 4
 %{
-Controlando a planta com PID continuo sintonizado atravï¿½s dos mï¿½todos ZN e 
+Controlando a planta com PID continuo sintonizado atraves dos metodos ZN e 
 CC
 %}
 sim('PIDcontinuos_01') % Para T=0.1s
@@ -133,7 +133,7 @@ resp_controlled_PID_CC_continuos_T01 = resp_controlledPID_ZNandCC_01continuos.si
 resp_controlled_PID_ZN_continuos_T0001 = resp_controlledPID_ZNandCC_0001continuos.signals.values(:,1);
 resp_controlled_PID_CC_continuos_T0001 = resp_controlledPID_ZNandCC_0001continuos.signals.values(:,2);
 
-%%%<Plotando os grï¿½ficos da Figura 2>
+%%%<Plotando os atraves da Figura 2>
 figure(2)
 %Sintonizado por ZN
 plot(resp_controlledPID_ZNandCC_0001continuos.time, resp_controlled_PID_ZN_continuos_T0001, 'g')
@@ -144,7 +144,7 @@ title('Reposta malha fechada com PID continuo sintonia ZN x CC p/ T=0.001s');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 hold off
 
-%%%<Plotando os grï¿½ficos da Figura 3>
+%%%<Plotando os atraves da Figura 3>
 figure(3)
 %Sintonizado por ZN
 plot(resp_controlledPID_ZNandCC_01continuos.time, resp_controlled_PID_ZN_continuos_T01, 'g')
@@ -157,18 +157,18 @@ hold off
 
 %%%Parte 5
 %{
-Calculando erros Absoluto, Absoluto Temporal, Quadrï¿½tico, Quadrï¿½tico
-Temporal para o controle PID continuo sintonizado pelo mï¿½todo de 
+Calculando erros Absoluto, Absoluto Temporal, Quadratico, Quadratico
+Temporal para o controle PID continuo sintonizado pelo metodo de 
 Ziegles-Nichols e Cohen-Coon.
 %}
 
-%Declaraï¿½ï¿½o das variï¿½veis para cï¿½lculo do somatï¿½rio dos erros
+%Declaracao das variaveis para calculo do somatorio dos erros
 Ezn_a = 0; Ecc_a = 0;
 Ezn_at = 0; Ecc_at = 0;
 Ezn_q = 0; Ecc_q = 0;
 Ezn_qt = 0; Ecc_qt = 0;
 
-%Cï¿½lculo dos erros
+%Calculo dos erros
 for i=1:length(resp_controlledPID_ZNandCC_0001continuos.time)
    %Integral do erro absoluto (IAE)
    Ezn_a = Ezn_a + abs(1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1));
@@ -178,11 +178,11 @@ for i=1:length(resp_controlledPID_ZNandCC_0001continuos.time)
    Ezn_at = Ezn_at + abs((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_0001continuos.time(i));
    Ecc_at = Ecc_at + abs((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_0001continuos.time(i));
     
-   %Integral do erro quadrï¿½tico (ISE)
+   %Integral do erro quadratico (ISE)
    Ezn_q = Ezn_q + (1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))^2;
    Ecc_q = Ecc_q + (1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))^2;
    
-   %Integral do erro quadrï¿½tico ponderado pelo tempo (ITSE)
+   %Integral do erro quadratico ponderado pelo tempo (ITSE)
    Ezn_qt = Ezn_qt + ((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_0001continuos.time(i))^2;
    Ecc_qt = Ecc_qt + ((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_0001continuos.time(i))^2;
 end
@@ -192,8 +192,8 @@ Erros = [Ezn_a Ecc_a
         Ezn_q  Ecc_q
         Ezn_qt Ecc_qt];
     
-%%%<Plotando os grï¿½ficos da Figura 4>
-%%%Erros acumulativos por 4 mï¿½todos de diferentes
+%%%<Plotando os atraves da Figura 4>
+%%%Erros acumulativos por 4 metodos de diferentes
 figure(4)
 bar(Erros);
 xNames = {'Absoluto';'Absoluto Temporal';'Quadrático';'Quadrático Temporal'};
@@ -206,21 +206,21 @@ hold off
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Q2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%Parte1
 %{
-Montando a tf G(s) do controlador para discretizï¿½-la pelo mï¿½todo de Tustin
+Montando a tf G(s) do controlador para discretiza-la pelo metodo de Tustin
 em T=0.1s e T=0.001s
 OBS: Estamos utilizando um filtro passa-baixa
 %}
 G_controller_zn = tf([kp_ZN+kd_ZN 20*kp_ZN+ki_ZN 20*ki_ZN],[1 20 0]);
 G_controller_cc = tf([kp_CC+kd_CC 20*kp_CC+ki_CC 20*ki_CC],[1 20 0]);
 
-%Discretizacao do controlador G(z) pelo mï¿½todo de Tustin
+%Discretizacao do controlador G(z) pelo metodo de Tustin
 Gcontroller_discreetizedTUSTIN_T01_controller_zn = c2d(G_controller_zn, 0.1, 'Tustin');
 Gcontroller_discreetizedTUSTIN_T0001_controller_zn = c2d(G_controller_zn, 0.001, 'Tustin');
 Gcontroller_discreetizedTUSTIN_T01_controller_cc = c2d(G_controller_cc, 0.1, 'Tustin');
 Gcontroller_discreetizedTUSTIN_T0001_controller_cc = c2d(G_controller_cc, 0.001, 'Tustin');
 
 %Chamando o diagrama de bloco que aplica os PID's discretos na planta cada
-%cada frequï¿½cia diferente
+%cada frequencia diferente
 sim('PIDdiscret_01'); %Para T=0,1s
 sim('PIDdiscret_0001'); %Para T=0,001s
 
@@ -232,7 +232,7 @@ resp_controlled_PID_CC_discret_T01 = resp_controlledPID_ZNandCC_01discret.signal
 resp_controlled_PID_ZN_discret_T0001 = resp_controlledPID_ZNandCC_0001discret.signals.values(:,1);
 resp_controlled_PID_CC_discret_T0001 = resp_controlledPID_ZNandCC_0001discret.signals.values(:,2);
 
-%Plotando os grï¿½ficos da planta controlada pelos controladores discretizados e sintonizados por ZN e CC nos tempos 
+%Plotando os atraves da planta controlada pelos controladores discretizados e sintonizados por ZN e CC nos tempos 
 %de amostragem de 0.1 0.001 G(z)
 %%====<T=0.1s>======
 figure(5)
