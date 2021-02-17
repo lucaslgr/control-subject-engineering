@@ -36,22 +36,22 @@ y_real = resp.signals.values;
 
 %%%Parte2 
 %{
-- identificar que o sistema cresce ou decresce linearmente apos o
+- identificar que o sistema cresce ou decresce linearmente apï¿½s o
 atraso de transporte e estabiliza em um valor, podemos considerar que o
-sistema eh monotonico e sendo monotonico podemos aproxima-lo de uma sistema
-de primeiro grau atraves do metodo de SMITH.
-Aplicando o metodo de curva de reacao e analise por metodo de Smith para 
+sistema ï¿½ monotï¿½nico e sendo monotï¿½nico podemos aproximï¿½-lo de uma sistema
+de primeiro grau atravï¿½s do mï¿½todo de SMITH.
+Aplicando o mï¿½todo de curva de reaï¿½ï¿½o e anï¿½lise por mï¿½todo de Smith para 
 aproximar a planta de uma G(s) de primeira ordem.
-- 1 Encontrar Tal: constante de tempo do sistema
-- 2 Encontrar L: atraso de transporte do sistema.
-- 3 Encontrar o K: constante de ganho estï¿½tico do sistema.
-- 4 Montar a G(s) aproximada de 1ï¿½ ordem com os valores acima
+- 1ï¿½ Encontrar Tal: constante de tempo do sistema
+- 2ï¿½ Encontrar L: atraso de transporte do sistema.
+- 3ï¿½ Encontrar o K: constante de ganho estï¿½tico do sistema.
+- 4ï¿½ Montar a G(s) aproximada de 1ï¿½ ordem com os valores acima
 %}
 % 28,3% do valor que o sistema estabiliza
 amp_28 = y_real(end)*0.283;
 % 63,2% do valor que o sistema estabiliza
 amp_63 = y_real(end)*0.632;
-%calculo do K que eh o ganho estatico do sistema deltaY/deltaU
+%cï¿½lculo do K que ï¿½ o ganho estï¿½tico do sistema deltaY/deltaU
 K = (y_real(end) - y_real(1))/(input.signals.values(end) - 0);
 
 % definindo uma tolerï¿½ncia de erro para encontrar os valores de tempo
@@ -87,7 +87,7 @@ hold on
 %%%segundo usando a aproximada obtida atravï¿½s do mï¿½todo de Smith
 plot(x_aprox, y_aprox, 'r')
 title('G(s) Real x G(s) Aproximada');
-legend('Real', 'Aproximada por Curva de Reação|SMITH');
+legend('Real', 'Aproximada por Curva de Reaï¿½ï¿½o|SMITH');
 hold off
 
 %%%Parte 3
@@ -196,8 +196,8 @@ Erros = [Ezn_a Ecc_a
 %%%Erros acumulativos por 4 mï¿½todos de diferentes
 figure(4)
 bar(Erros);
-xNames = {'Absoluto';'Absoluto Temporal';'Quadrático';'Quadrático Temporal'};
-title('Somatório dos Erros p/ T=0.001s');
+xNames = {'Absoluto';'Absoluto Temporal';'Quadrï¿½tico';'Quadrï¿½tico Temporal'};
+title('Somatï¿½rio dos Erros p/ T=0.001s');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 set(gca,'xticklabel',xNames)
 hold off
