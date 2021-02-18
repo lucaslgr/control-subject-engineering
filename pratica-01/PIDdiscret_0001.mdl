@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.25"
+    ComputedModelVersion    "1.27"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, -8.0, 1382.0, 784.0]
+      Location		      [-8.0, 0.0, 1382.0, 784.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -66,7 +66,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1332.0, 609.0]
 	ZoomFactor		[1.75]
-	Offset			[71.96232963514764, 20.410820164618041]
+	Offset			[71.962329635147626, 20.410820164618031]
       }
     }
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Feb 17 01:04:46 2021"
-  RTWModifiedTimeStamp	  535421082
-  ModelVersionFormat	  "1.%<AutoIncrement:25>"
+  LastModifiedDate	  "Wed Feb 17 23:04:59 2021"
+  RTWModifiedTimeStamp	  535500298
+  ModelVersionFormat	  "1.%<AutoIncrement:27>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -891,10 +891,14 @@ Model {
       TransDelayFeedthrough   off
       PadeOrder		      "0"
     }
+    Block {
+      BlockType		      ZeroOrderHold
+      SampleTime	      "1"
+    }
   }
   System {
     Name		    "PIDdiscret_0001"
-    Location		    [-8, -8, 1374, 776]
+    Location		    [-8, 0, 1374, 784]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -908,13 +912,13 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "175"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "28"
+    SIDHighWatermark	    "30"
     Block {
       BlockType		      DiscreteTransferFcn
       Name		      "Discrete\nTransfer Fcn"
       SID		      "26"
       Ports		      [1, 1]
-      Position		      [245, 67, 305, 103]
+      Position		      [315, 67, 375, 103]
       ZOrder		      38
       InputPortMap	      "u0"
       Numerator		      "[8.989 -17.78 8.789]"
@@ -926,7 +930,7 @@ Model {
       Name		      "Discrete\nTransfer Fcn1"
       SID		      "27"
       Ports		      [1, 1]
-      Position		      [245, 162, 305, 198]
+      Position		      [315, 162, 375, 198]
       ZOrder		      39
       InputPortMap	      "u0"
       Numerator		      "[6.593  -13.07  6.473]"
@@ -937,7 +941,7 @@ Model {
       BlockType		      TransferFcn
       Name		      "G(s) aproximada\n1º ordem (SMITH)"
       SID		      "3"
-      Position		      [345, 162, 405, 198]
+      Position		      [415, 162, 475, 198]
       ZOrder		      22
       Numerator		      "[K]"
       Denominator	      "[T 1]"
@@ -946,7 +950,7 @@ Model {
       BlockType		      TransferFcn
       Name		      "G(s) aproximada\n1º ordem (SMITH)1"
       SID		      "15"
-      Position		      [345, 67, 405, 103]
+      Position		      [415, 67, 475, 103]
       ZOrder		      34
       Numerator		      "[K]"
       Denominator	      "[T 1]"
@@ -956,7 +960,7 @@ Model {
       Name		      "Mux"
       SID		      "25"
       Ports		      [2, 1]
-      Position		      [530, 81, 535, 119]
+      Position		      [600, 81, 605, 119]
       ZOrder		      37
       ShowName		      off
       Inputs		      "2"
@@ -1013,7 +1017,7 @@ Model {
       Name		      "To Workspace"
       SID		      "11"
       Ports		      [1]
-      Position		      [555, 69, 770, 131]
+      Position		      [625, 69, 840, 131]
       ZOrder		      24
       VariableName	      "resp_controlledPID_ZNandCC_0001discret"
       MaxDataPoints	      "inf"
@@ -1027,7 +1031,7 @@ Model {
       Name		      "Transport\nDelay"
       SID		      "12"
       Ports		      [1, 1]
-      Position		      [440, 165, 470, 195]
+      Position		      [510, 165, 540, 195]
       ZOrder		      23
       DelayTime		      "L"
     }
@@ -1036,9 +1040,25 @@ Model {
       Name		      "Transport\nDelay1"
       SID		      "24"
       Ports		      [1, 1]
-      Position		      [440, 70, 470, 100]
+      Position		      [510, 70, 540, 100]
       ZOrder		      35
       DelayTime		      "L"
+    }
+    Block {
+      BlockType		      ZeroOrderHold
+      Name		      "Zero-Order\nHold"
+      SID		      "29"
+      Position		      [250, 70, 285, 100]
+      ZOrder		      40
+      SampleTime	      "0.001"
+    }
+    Block {
+      BlockType		      ZeroOrderHold
+      Name		      "Zero-Order\nHold1"
+      SID		      "30"
+      Position		      [250, 165, 285, 195]
+      ZOrder		      41
+      SampleTime	      "0.001"
     }
     Line {
       ZOrder		      1
@@ -1051,7 +1071,7 @@ Model {
       ZOrder		      74
       SrcBlock		      "Sum"
       SrcPort		      1
-      DstBlock		      "Discrete\nTransfer Fcn1"
+      DstBlock		      "Zero-Order\nHold1"
       DstPort		      1
     }
     Line {
@@ -1081,7 +1101,7 @@ Model {
       }
       Branch {
 	ZOrder			91
-	Points			[0, 51; -283, 0]
+	Points			[0, 51; -353, 0]
 	DstBlock		"Sum"
 	DstPort			2
       }
@@ -1112,7 +1132,7 @@ Model {
       }
       Branch {
 	ZOrder			88
-	Points			[0, 51; -283, 0]
+	Points			[0, 51; -353, 0]
 	DstBlock		"Sum2"
 	DstPort			2
       }
@@ -1128,7 +1148,7 @@ Model {
       ZOrder		      78
       SrcBlock		      "Sum2"
       SrcPort		      1
-      DstBlock		      "Discrete\nTransfer Fcn"
+      DstBlock		      "Zero-Order\nHold"
       DstPort		      1
     }
     Line {
@@ -1136,6 +1156,20 @@ Model {
       SrcBlock		      "Discrete\nTransfer Fcn"
       SrcPort		      1
       DstBlock		      "G(s) aproximada\n1º ordem (SMITH)1"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      102
+      SrcBlock		      "Zero-Order\nHold1"
+      SrcPort		      1
+      DstBlock		      "Discrete\nTransfer Fcn1"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      103
+      SrcBlock		      "Zero-Order\nHold"
+      SrcPort		      1
+      DstBlock		      "Discrete\nTransfer Fcn"
       DstPort		      1
     }
   }
