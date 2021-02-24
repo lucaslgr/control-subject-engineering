@@ -56,7 +56,7 @@ K = (y_real(end) - y_real(1))/(input.signals.values(end) - 0);
 
 % definindo uma tolerancia de erro para encontrar os valores de tempo
 % correspondentes a amp_28 e amp_63
-tolerance1 = 0.0001;
+tolerance1 = 0.001;
 
 %loop para buscar o valor de tempo correspondente aos valores de amp_28
 %(28,3%) e amp_63(63,2%)
@@ -221,8 +221,8 @@ for i=1:length(resp_controlledPID_ZNandCC_01continuos.time)
    Ecc_at = Ecc_at + abs((1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_01continuos.time(i));
     
    %Integral do erro quadratico (ISE)
-   Ezn_q = Ezn_q + (1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))^2;
-   Ecc_q = Ecc_q + (1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))^2;
+   Ezn_q = Ezn_q + (1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,1))^2;
+   Ecc_q = Ecc_q + (1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,2))^2;
    
    %Integral do erro quadratico ponderado pelo tempo (ITSE)
    Ezn_qt = Ezn_qt + ((1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_01continuos.time(i))^2;

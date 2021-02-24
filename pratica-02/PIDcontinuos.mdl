@@ -1,5 +1,5 @@
 Model {
-  Name			  "PIDcontinuos_0001"
+  Name			  "PIDcontinuos"
   Version		  8.5
   MdlSubVersion		  0
   SavedCharacterEncoding  "windows-1252"
@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.12"
+    ComputedModelVersion    "1.13"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "PIDcontinuos_0001"
+      Cell		      "PIDcontinuos"
       PropName		      "mdlProps"
     }
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [1426.0, 171.0, 1320.0, 784.0]
+      Location		      [61.0, 90.0, 1320.0, 784.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Feb 07 11:13:08 2021"
-  RTWModifiedTimeStamp	  534593321
-  ModelVersionFormat	  "1.%<AutoIncrement:12>"
+  LastModifiedDate	  "Wed Feb 24 16:15:13 2021"
+  RTWModifiedTimeStamp	  536084105
+  ModelVersionFormat	  "1.%<AutoIncrement:13>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -725,7 +725,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 251, 97, 1177, 648 ] 
+      ConfigPrmDlgPosition     [ 220, 97, 1146, 648 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -891,8 +891,8 @@ Model {
     }
   }
   System {
-    Name		    "PIDcontinuos_0001"
-    Location		    [1426, 171, 2746, 955]
+    Name		    "PIDcontinuos"
+    Location		    [61, 90, 1381, 874]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1117,7 +1117,7 @@ Model {
       Ports		      [1]
       Position		      [650, 75, 880, 115]
       ZOrder		      24
-      VariableName	      "resp_controlledPID_ZNandCC_0001continuos"
+      VariableName	      "resp_controlledPID_ZNandCC_continuos"
       MaxDataPoints	      "inf"
       SaveFormat	      "Structure With Time"
       Save2DSignal	      "3-D array (concatenate along third dimension)"

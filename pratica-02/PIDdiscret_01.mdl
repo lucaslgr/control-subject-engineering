@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.26"
+    ComputedModelVersion    "1.35"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [1407.0, 32.0, 1382.0, 784.0]
+      Location		      [1624.0, 82.0, 1311.0, 669.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -64,9 +64,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1332.0, 609.0]
-	ZoomFactor		[1.75]
-	Offset			[66.665768851897951, 0.024479659150557609]
+	Extents			[1261.0, 494.0]
+	ZoomFactor		[2.0]
+	Offset			[24.127466000645029, 27.38162251629339]
       }
     }
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Feb 19 00:30:12 2021"
-  RTWModifiedTimeStamp	  535591812
-  ModelVersionFormat	  "1.%<AutoIncrement:26>"
+  LastModifiedDate	  "Wed Feb 24 16:28:02 2021"
+  RTWModifiedTimeStamp	  536084861
+  ModelVersionFormat	  "1.%<AutoIncrement:35>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -195,7 +195,7 @@ Model {
 	  StartTime		  "0.0"
 	  StopTime		  "7"
 	  AbsTol		  "auto"
-	  FixedStep		  "0.1"
+	  FixedStep		  "0.001"
 	  InitialStep		  "auto"
 	  MaxNumMinSteps	  "-1"
 	  MaxOrder		  5
@@ -725,7 +725,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 251, 97, 1177, 648 ] 
+      ConfigPrmDlgPosition     [ 1623, 163, 2599, 802 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -898,7 +898,7 @@ Model {
   }
   System {
     Name		    "PIDdiscret_01"
-    Location		    [1407, 32, 2789, 816]
+    Location		    [1624, 82, 2935, 751]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -910,7 +910,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "175"
+    ZoomFactor		    "200"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "29"
     Block {
@@ -950,7 +950,7 @@ Model {
       Position		      [255, 157, 315, 193]
       ZOrder		      38
       InputPortMap	      "u0"
-      Numerator		      "[8.872 -3.67 0.7322]"
+      Numerator		      "[8.368 -3.602 0.6967]"
       Denominator	      "[1 -1 0]"
       SampleTime	      "0.1"
     }
@@ -962,9 +962,11 @@ Model {
       Position		      [255, 67, 315, 103]
       ZOrder		      39
       InputPortMap	      "u0"
-      Numerator		      "[14.24  -2.991  0.07965]"
+      Numerator		      "[13.41  -3.074  0.0792]"
       Denominator	      "[1 -1 0]"
       SampleTime	      "0.1"
+      DenCoefDataTypeStr      "int8"
+      DenAccumDataTypeStr     "Inherit: Same as input"
     }
     Block {
       BlockType		      Step
@@ -1028,20 +1030,20 @@ Model {
     }
     Block {
       BlockType		      TransportDelay
-      Name		      "Transport\nDelay"
-      SID		      "12"
-      Ports		      [1, 1]
-      Position		      [435, 70, 465, 100]
-      ZOrder		      23
-      DelayTime		      "L"
-    }
-    Block {
-      BlockType		      TransportDelay
-      Name		      "Transport\nDelay1"
+      Name		      "Transport\nDelay CC"
       SID		      "24"
       Ports		      [1, 1]
       Position		      [435, 160, 465, 190]
       ZOrder		      35
+      DelayTime		      "L"
+    }
+    Block {
+      BlockType		      TransportDelay
+      Name		      "Transport\nDelay ZN"
+      SID		      "12"
+      Ports		      [1, 1]
+      Position		      [435, 70, 465, 100]
+      ZOrder		      23
       DelayTime		      "L"
     }
     Block {
@@ -1085,12 +1087,12 @@ Model {
       ZOrder		      13
       SrcBlock		      "G(s) aproximada\n1º ordem (SMITH)"
       SrcPort		      1
-      DstBlock		      "Transport\nDelay"
+      DstBlock		      "Transport\nDelay ZN"
       DstPort		      1
     }
     Line {
       ZOrder		      16
-      SrcBlock		      "Transport\nDelay"
+      SrcBlock		      "Transport\nDelay ZN"
       SrcPort		      1
       Points		      [8, 0]
       Branch {
@@ -1116,12 +1118,12 @@ Model {
       ZOrder		      32
       SrcBlock		      "G(s) aproximada\n1º ordem (SMITH)1"
       SrcPort		      1
-      DstBlock		      "Transport\nDelay1"
+      DstBlock		      "Transport\nDelay CC"
       DstPort		      1
     }
     Line {
       ZOrder		      35
-      SrcBlock		      "Transport\nDelay1"
+      SrcBlock		      "Transport\nDelay CC"
       SrcPort		      1
       Points		      [8, 0]
       Branch {

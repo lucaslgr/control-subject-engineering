@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.31"
+    ComputedModelVersion    "1.32"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Feb 19 00:30:22 2021"
-  RTWModifiedTimeStamp	  535591822
-  ModelVersionFormat	  "1.%<AutoIncrement:31>"
+  LastModifiedDate	  "Wed Feb 24 16:29:35 2021"
+  RTWModifiedTimeStamp	  536084971
+  ModelVersionFormat	  "1.%<AutoIncrement:32>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -950,7 +950,7 @@ Model {
       Position		      [315, 162, 375, 198]
       ZOrder		      39
       InputPortMap	      "u0"
-      Numerator		      "[6.653  -13.14  6.491]"
+      Numerator		      "[6.347  -12.54  6.195]"
       Denominator	      "[1 -1.98 0.9802]"
       SampleTime	      "0.001"
     }
@@ -962,7 +962,7 @@ Model {
       Position		      [315, 67, 375, 103]
       ZOrder		      38
       InputPortMap	      "u0"
-      Numerator		      "[8.71 -17.14 8.43]"
+      Numerator		      "[8.332 -16.4 8.068]"
       Denominator	      "[1 -1.98 0.9802]"
       SampleTime	      "0.001"
     }
