@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.32"
+    ComputedModelVersion    "1.37"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [1430.0, 80.0, 1382.0, 784.0]
+      Location		      [17.0, 6.0, 1382.0, 781.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -64,9 +64,9 @@ Model {
 	IsActive		[1]
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
-	Extents			[1332.0, 609.0]
+	Extents			[1332.0, 606.0]
 	ZoomFactor		[1.75]
-	Offset			[71.962329635147626, 20.410820164618031]
+	Offset			[119.96232963514763, 4.4108201646180287]
       }
     }
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Feb 24 16:29:35 2021"
-  RTWModifiedTimeStamp	  536084971
-  ModelVersionFormat	  "1.%<AutoIncrement:32>"
+  LastModifiedDate	  "Tue Mar 02 08:14:55 2021"
+  RTWModifiedTimeStamp	  536573689
+  ModelVersionFormat	  "1.%<AutoIncrement:37>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -211,8 +211,8 @@ Model {
 	  SolverMode		  "Auto"
 	  EnableConcurrentExecution off
 	  ConcurrentTasks	  off
-	  Solver		  "ode3"
-	  SolverName		  "ode3"
+	  Solver		  "ode45"
+	  SolverName		  "ode45"
 	  SolverJacobianMethodControl "auto"
 	  ShapePreserveControl	  "DisableAll"
 	  ZeroCrossControl	  "UseLocalSettings"
@@ -725,7 +725,7 @@ Model {
       }
       Name		      "Configuration"
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 251, 97, 1177, 648 ] 
+      ConfigPrmDlgPosition     [ -8, -8, 1374, 776 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -898,7 +898,7 @@ Model {
   }
   System {
     Name		    "PIDdiscret_0001"
-    Location		    [1430, 80, 2812, 864]
+    Location		    [17, 6, 1399, 787]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -912,7 +912,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "175"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "30"
+    SIDHighWatermark	    "40"
     Block {
       BlockType		      TransferFcn
       Name		      "G(s) aproximada\n1º ordem (SMITH)"
@@ -947,7 +947,7 @@ Model {
       Name		      "PID - Discrete\nTransfer CC"
       SID		      "27"
       Ports		      [1, 1]
-      Position		      [315, 162, 375, 198]
+      Position		      [270, 162, 330, 198]
       ZOrder		      39
       InputPortMap	      "u0"
       Numerator		      "[6.347  -12.54  6.195]"
@@ -959,7 +959,7 @@ Model {
       Name		      "PID - Discrete\nTransfer ZN"
       SID		      "26"
       Ports		      [1, 1]
-      Position		      [315, 67, 375, 103]
+      Position		      [270, 67, 330, 103]
       ZOrder		      38
       InputPortMap	      "u0"
       Numerator		      "[8.332 -16.4 8.068]"
@@ -970,26 +970,26 @@ Model {
       BlockType		      Step
       Name		      "Step"
       SID		      "8"
-      Position		      [145, 165, 175, 195]
+      Position		      [160, 165, 190, 195]
       ZOrder		      13
       Time		      "0"
-      SampleTime	      "0"
+      SampleTime	      "0.001"
     }
     Block {
       BlockType		      Step
       Name		      "Step1"
       SID		      "20"
-      Position		      [145, 70, 175, 100]
+      Position		      [160, 70, 190, 100]
       ZOrder		      25
       Time		      "0"
-      SampleTime	      "0"
+      SampleTime	      "0.001"
     }
     Block {
       BlockType		      Sum
       Name		      "Sum"
       SID		      "9"
       Ports		      [2, 1]
-      Position		      [210, 170, 230, 190]
+      Position		      [225, 170, 245, 190]
       ZOrder		      14
       ShowName		      off
       IconShape		      "round"
@@ -1003,7 +1003,7 @@ Model {
       Name		      "Sum2"
       SID		      "21"
       Ports		      [2, 1]
-      Position		      [210, 75, 230, 95]
+      Position		      [225, 75, 245, 95]
       ZOrder		      26
       ShowName		      off
       IconShape		      "round"
@@ -1046,18 +1046,18 @@ Model {
     }
     Block {
       BlockType		      ZeroOrderHold
-      Name		      "Zero-Order\nHold"
-      SID		      "29"
-      Position		      [250, 70, 285, 100]
-      ZOrder		      40
+      Name		      "Zero-Order\nHold2\n"
+      SID		      "39"
+      Position		      [355, 70, 390, 100]
+      ZOrder		      50
       SampleTime	      "0.001"
     }
     Block {
       BlockType		      ZeroOrderHold
-      Name		      "Zero-Order\nHold1"
-      SID		      "30"
-      Position		      [250, 165, 285, 195]
-      ZOrder		      41
+      Name		      "Zero-Order\nHold3"
+      SID		      "40"
+      Position		      [355, 165, 390, 195]
+      ZOrder		      51
       SampleTime	      "0.001"
     }
     Line {
@@ -1068,17 +1068,10 @@ Model {
       DstPort		      1
     }
     Line {
-      ZOrder		      74
-      SrcBlock		      "Sum"
-      SrcPort		      1
-      DstBlock		      "Zero-Order\nHold1"
-      DstPort		      1
-    }
-    Line {
       ZOrder		      73
       SrcBlock		      "PID - Discrete\nTransfer CC"
       SrcPort		      1
-      DstBlock		      "G(s) aproximada\n1º ordem (SMITH)"
+      DstBlock		      "Zero-Order\nHold3"
       DstPort		      1
     }
     Line {
@@ -1101,7 +1094,7 @@ Model {
       }
       Branch {
 	ZOrder			91
-	Points			[0, 51; -353, 0]
+	Points			[0, 51; -338, 0]
 	DstBlock		"Sum"
 	DstPort			2
       }
@@ -1132,7 +1125,7 @@ Model {
       }
       Branch {
 	ZOrder			88
-	Points			[0, 51; -353, 0]
+	Points			[0, 51; -338, 0]
 	DstBlock		"Sum2"
 	DstPort			2
       }
@@ -1145,31 +1138,38 @@ Model {
       DstPort		      1
     }
     Line {
-      ZOrder		      78
-      SrcBlock		      "Sum2"
-      SrcPort		      1
-      DstBlock		      "Zero-Order\nHold"
-      DstPort		      1
-    }
-    Line {
       ZOrder		      81
       SrcBlock		      "PID - Discrete\nTransfer ZN"
       SrcPort		      1
-      DstBlock		      "G(s) aproximada\n1º ordem (SMITH)1"
+      DstBlock		      "Zero-Order\nHold2\n"
       DstPort		      1
     }
     Line {
-      ZOrder		      102
-      SrcBlock		      "Zero-Order\nHold1"
+      ZOrder		      118
+      SrcBlock		      "Sum"
       SrcPort		      1
       DstBlock		      "PID - Discrete\nTransfer CC"
       DstPort		      1
     }
     Line {
-      ZOrder		      103
-      SrcBlock		      "Zero-Order\nHold"
+      ZOrder		      114
+      SrcBlock		      "Sum2"
       SrcPort		      1
       DstBlock		      "PID - Discrete\nTransfer ZN"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      112
+      SrcBlock		      "Zero-Order\nHold2\n"
+      SrcPort		      1
+      DstBlock		      "G(s) aproximada\n1º ordem (SMITH)1"
+      DstPort		      1
+    }
+    Line {
+      ZOrder		      113
+      SrcBlock		      "Zero-Order\nHold3"
+      SrcPort		      1
+      DstBlock		      "G(s) aproximada\n1º ordem (SMITH)"
       DstPort		      1
     }
   }
