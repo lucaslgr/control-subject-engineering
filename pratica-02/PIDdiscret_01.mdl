@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.42"
+    ComputedModelVersion    "1.44"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [-8.0, 0.0, 1382.0, 784.0]
+      Location		      [1412.0, 56.0, 1382.0, 784.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -65,8 +65,8 @@ Model {
 	ViewObjType		"SimulinkTopLevel"
 	LoadSaveID		"0"
 	Extents			[1332.0, 609.0]
-	ZoomFactor		[1.25]
-	Offset			[-144.10784207217904, -94.792886222552738]
+	ZoomFactor		[1.5]
+	Offset			[-35.307842072179085, -48.792886222552738]
       }
     }
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Mar 02 08:15:12 2021"
-  RTWModifiedTimeStamp	  536573710
-  ModelVersionFormat	  "1.%<AutoIncrement:42>"
+  LastModifiedDate	  "Sat Mar 06 16:16:57 2021"
+  RTWModifiedTimeStamp	  536948217
+  ModelVersionFormat	  "1.%<AutoIncrement:44>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -839,15 +839,6 @@ Model {
       NonVirtualBus	      off
     }
     Block {
-      BlockType		      RateTransition
-      Integrity		      on
-      Deterministic	      on
-      X0		      "0"
-      OutPortSampleTimeOpt    "Specify"
-      OutPortSampleTimeMultiple	"1"
-      OutPortSampleTime	      "-1"
-    }
-    Block {
       BlockType		      Step
       Time		      "1"
       Before		      "0"
@@ -907,7 +898,7 @@ Model {
   }
   System {
     Name		    "PIDdiscret_01"
-    Location		    [-8, 0, 1374, 784]
+    Location		    [1412, 56, 2794, 840]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -919,7 +910,7 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "125"
+    ZoomFactor		    "150"
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    "34"
     Block {
@@ -956,7 +947,7 @@ Model {
       Name		      "PID - Discrete\nTransfer CC"
       SID		      "26"
       Ports		      [1, 1]
-      Position		      [120, 157, 180, 193]
+      Position		      [185, 157, 245, 193]
       ZOrder		      38
       InputPortMap	      "u0"
       Numerator		      "[8.368 -3.602 0.6967]"
@@ -968,7 +959,7 @@ Model {
       Name		      "PID - Discrete\nTransfer ZN"
       SID		      "27"
       Ports		      [1, 1]
-      Position		      [120, 67, 180, 103]
+      Position		      [185, 67, 245, 103]
       ZOrder		      39
       InputPortMap	      "u0"
       Numerator		      "[13.41  -3.074  0.0792]"
@@ -978,24 +969,10 @@ Model {
       DenAccumDataTypeStr     "Inherit: Same as input"
     }
     Block {
-      BlockType		      RateTransition
-      Name		      "Rate Transition"
-      SID		      "33"
-      Position		      [270, 64, 310, 106]
-      ZOrder		      44
-    }
-    Block {
-      BlockType		      RateTransition
-      Name		      "Rate Transition1"
-      SID		      "34"
-      Position		      [270, 154, 310, 196]
-      ZOrder		      45
-    }
-    Block {
       BlockType		      Step
       Name		      "Step"
       SID		      "8"
-      Position		      [0, 70, 30, 100]
+      Position		      [65, 70, 95, 100]
       ZOrder		      13
       Time		      "0"
       SampleTime	      "0.1"
@@ -1004,7 +981,7 @@ Model {
       BlockType		      Step
       Name		      "Step1"
       SID		      "20"
-      Position		      [0, 160, 30, 190]
+      Position		      [65, 160, 95, 190]
       ZOrder		      25
       Time		      "0"
       SampleTime	      "0.1"
@@ -1014,7 +991,7 @@ Model {
       Name		      "Sum"
       SID		      "9"
       Ports		      [2, 1]
-      Position		      [65, 75, 85, 95]
+      Position		      [130, 75, 150, 95]
       ZOrder		      14
       ShowName		      off
       IconShape		      "round"
@@ -1028,7 +1005,7 @@ Model {
       Name		      "Sum2"
       SID		      "21"
       Ports		      [2, 1]
-      Position		      [65, 165, 85, 185]
+      Position		      [130, 165, 150, 185]
       ZOrder		      26
       ShowName		      off
       IconShape		      "round"
@@ -1071,18 +1048,18 @@ Model {
     }
     Block {
       BlockType		      ZeroOrderHold
-      Name		      "Zero-Order\nHold2"
-      SID		      "31"
-      Position		      [205, 70, 240, 100]
-      ZOrder		      42
+      Name		      "Zero-Order\nHold-CC"
+      SID		      "32"
+      Position		      [270, 160, 305, 190]
+      ZOrder		      43
       SampleTime	      "0.1"
     }
     Block {
       BlockType		      ZeroOrderHold
-      Name		      "Zero-Order\nHold3"
-      SID		      "32"
-      Position		      [205, 160, 240, 190]
-      ZOrder		      43
+      Name		      "Zero-Order\nHold-ZN"
+      SID		      "31"
+      Position		      [270, 70, 305, 100]
+      ZOrder		      42
       SampleTime	      "0.1"
     }
     Line {
@@ -1096,7 +1073,7 @@ Model {
       ZOrder		      73
       SrcBlock		      "PID - Discrete\nTransfer ZN"
       SrcPort		      1
-      DstBlock		      "Zero-Order\nHold2"
+      DstBlock		      "Zero-Order\nHold-ZN"
       DstPort		      1
     }
     Line {
@@ -1118,7 +1095,7 @@ Model {
       }
       Branch {
 	ZOrder			37
-	Points			[0, 60; -403, 0]
+	Points			[0, 60; -338, 0]
 	DstBlock		"Sum"
 	DstPort			2
       }
@@ -1144,7 +1121,7 @@ Model {
       Points		      [8, 0]
       Branch {
 	ZOrder			42
-	Points			[0, 58; -403, 0]
+	Points			[0, 58; -338, 0]
 	DstBlock		"Sum2"
 	DstPort			2
       }
@@ -1166,7 +1143,7 @@ Model {
       ZOrder		      81
       SrcBlock		      "PID - Discrete\nTransfer CC"
       SrcPort		      1
-      DstBlock		      "Zero-Order\nHold3"
+      DstBlock		      "Zero-Order\nHold-CC"
       DstPort		      1
     }
     Line {
@@ -1184,29 +1161,15 @@ Model {
       DstPort		      1
     }
     Line {
-      ZOrder		      90
-      SrcBlock		      "Zero-Order\nHold2"
-      SrcPort		      1
-      DstBlock		      "Rate Transition"
-      DstPort		      1
-    }
-    Line {
-      ZOrder		      91
-      SrcBlock		      "Zero-Order\nHold3"
-      SrcPort		      1
-      DstBlock		      "Rate Transition1"
-      DstPort		      1
-    }
-    Line {
-      ZOrder		      99
-      SrcBlock		      "Rate Transition"
+      ZOrder		      103
+      SrcBlock		      "Zero-Order\nHold-ZN"
       SrcPort		      1
       DstBlock		      "G(s) aproximada\n1º ordem (SMITH)"
       DstPort		      1
     }
     Line {
-      ZOrder		      100
-      SrcBlock		      "Rate Transition1"
+      ZOrder		      105
+      SrcBlock		      "Zero-Order\nHold-CC"
       SrcPort		      1
       DstBlock		      "G(s) aproximada\n1º ordem (SMITH)1"
       DstPort		      1
@@ -1218,7 +1181,7 @@ Model {
       "\n</style></head><body style=\" font-family:'Helvetica'; font-size:10px; font-weight:400; font-style:normal;\">\n"
       "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-b"
       "lock-indent:0; text-indent:0px;\"><br /></p></body></html>"
-      Position		      [82, 190, 84, 205]
+      Position		      [147, 190, 149, 205]
       InternalMargins	      [0, 0, 0, 0]
       FixedHeight	      off
       FixedWidth	      off

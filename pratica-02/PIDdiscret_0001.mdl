@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.37"
+    ComputedModelVersion    "1.38"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -40,7 +40,7 @@ Model {
       $ObjectID		      3
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [17.0, 6.0, 1382.0, 781.0]
+      Location		      [1478.0, 134.0, 1382.0, 781.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		4
@@ -66,7 +66,7 @@ Model {
 	LoadSaveID		"0"
 	Extents			[1332.0, 606.0]
 	ZoomFactor		[1.75]
-	Offset			[119.96232963514763, 4.4108201646180287]
+	Offset			[119.96232963514763, 4.4108201646180305]
       }
     }
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue Mar 02 08:14:55 2021"
-  RTWModifiedTimeStamp	  536573689
-  ModelVersionFormat	  "1.%<AutoIncrement:37>"
+  LastModifiedDate	  "Sat Mar 06 16:16:41 2021"
+  RTWModifiedTimeStamp	  536948201
+  ModelVersionFormat	  "1.%<AutoIncrement:38>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -898,7 +898,7 @@ Model {
   }
   System {
     Name		    "PIDdiscret_0001"
-    Location		    [17, 6, 1399, 787]
+    Location		    [1478, 134, 2860, 915]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1046,18 +1046,18 @@ Model {
     }
     Block {
       BlockType		      ZeroOrderHold
-      Name		      "Zero-Order\nHold2\n"
-      SID		      "39"
-      Position		      [355, 70, 390, 100]
-      ZOrder		      50
+      Name		      "Zero-Order\nHold-CC"
+      SID		      "40"
+      Position		      [355, 165, 390, 195]
+      ZOrder		      51
       SampleTime	      "0.001"
     }
     Block {
       BlockType		      ZeroOrderHold
-      Name		      "Zero-Order\nHold3"
-      SID		      "40"
-      Position		      [355, 165, 390, 195]
-      ZOrder		      51
+      Name		      "Zero-Order\nHold-ZN\n\n"
+      SID		      "39"
+      Position		      [355, 70, 390, 100]
+      ZOrder		      50
       SampleTime	      "0.001"
     }
     Line {
@@ -1071,7 +1071,7 @@ Model {
       ZOrder		      73
       SrcBlock		      "PID - Discrete\nTransfer CC"
       SrcPort		      1
-      DstBlock		      "Zero-Order\nHold3"
+      DstBlock		      "Zero-Order\nHold-CC"
       DstPort		      1
     }
     Line {
@@ -1141,7 +1141,7 @@ Model {
       ZOrder		      81
       SrcBlock		      "PID - Discrete\nTransfer ZN"
       SrcPort		      1
-      DstBlock		      "Zero-Order\nHold2\n"
+      DstBlock		      "Zero-Order\nHold-ZN\n\n"
       DstPort		      1
     }
     Line {
@@ -1160,14 +1160,14 @@ Model {
     }
     Line {
       ZOrder		      112
-      SrcBlock		      "Zero-Order\nHold2\n"
+      SrcBlock		      "Zero-Order\nHold-ZN\n\n"
       SrcPort		      1
       DstBlock		      "G(s) aproximada\n1º ordem (SMITH)1"
       DstPort		      1
     }
     Line {
       ZOrder		      113
-      SrcBlock		      "Zero-Order\nHold3"
+      SrcBlock		      "Zero-Order\nHold-CC"
       SrcPort		      1
       DstBlock		      "G(s) aproximada\n1º ordem (SMITH)"
       DstPort		      1
