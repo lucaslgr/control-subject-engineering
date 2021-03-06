@@ -49,25 +49,30 @@ aproximar a planta de uma G(s) de primeira ordem.
 %}
 % 28,3% do valor que o sistema estabiliza
 amp_28 = y_real(end)*0.283;
+flag_amp_28_found = false;
 % 63,2% do valor que o sistema estabiliza
 amp_63 = y_real(end)*0.632;
+flag_amp_63_found = false;
 %calculo do K que eh o ganho estatico do sistema deltaY/deltaU
 K = (y_real(end) - y_real(1))/(input.signals.values(end) - 0);
 
 % definindo uma tolerancia de erro para encontrar os valores de tempo
 % correspondentes a amp_28 e amp_63
-tolerance1 = 0.001;
+%tolerance1 = 0.001; %%EU subtitui pelas flags que encontram o primeiro valor
+%maior ou igual
 
 %loop para buscar o valor de tempo correspondente aos valores de amp_28
 %(28,3%) e amp_63(63,2%)
 for i=1:length(y_real)
-    if((y_real(i)>=amp_28-tolerance1) && (y_real(i)<=amp_28+tolerance1))
-        t1_28 = x_real(i)
-        y_real(i)
+    if((y_real(i)>=amp_28) && flag_amp_28_found == false)
+        t1_28 = x_real(i);
+        y_real(i);
+        flag_amp_28_found = true;
     end
-    if((y_real(i)>=amp_63-tolerance1) && (y_real(i)<=amp_63+tolerance1))
-        t2_63 = x_real(i)
-        y_real(i)
+    if((y_real(i)>=amp_63) && flag_amp_63_found == false)
+        t2_63 = x_real(i);
+        y_real(i);
+        flag_amp_63_found = true;
     end
 end
 
@@ -122,36 +127,20 @@ CC = [kp_CC ki_CC kd_CC]
 Controlando a planta com PID continuo sintonizado atraves dos metodos ZN e 
 CC
 %}
-sim('PIDcontinuos_01') % Para T=0.1s
-sim('PIDcontinuos_0001') % Para T=0.001s
+sim('PIDcontinuos') % Passo de SIMULACAO NO SIMULINK T=0.001s
 
-%Extraindo os valores de resposta do sistema controlado p/ T = 0,001
-resp_controlled_PID_ZN_continuos_T01 = resp_controlledPID_ZNandCC_01continuos.signals.values(:,1);
-resp_controlled_PID_CC_continuos_T01 = resp_controlledPID_ZNandCC_01continuos.signals.values(:,2);
-
-%Extraindo os valores de resposta do sistema controlado p/ T = 0,001
-resp_controlled_PID_ZN_continuos_T0001 = resp_controlledPID_ZNandCC_0001continuos.signals.values(:,1);
-resp_controlled_PID_CC_continuos_T0001 = resp_controlledPID_ZNandCC_0001continuos.signals.values(:,2);
+%Extraindo os valores de resposta do sistema controlado
+resp_controlled_PID_ZN_continuos = resp_controlledPID_ZNandCC_continuos.signals.values(:,1);
+resp_controlled_PID_CC_continuos = resp_controlledPID_ZNandCC_continuos.signals.values(:,2);
 
 %%%<Plotando os atraves da Figura 2>
 figure(2)
 %Sintonizado por ZN
-plot(resp_controlledPID_ZNandCC_0001continuos.time, resp_controlled_PID_ZN_continuos_T0001, 'g')
+plot(resp_controlledPID_ZNandCC_continuos.time, resp_controlled_PID_ZN_continuos, 'g')
 hold on
 %Sintonizado por CC
-plot(resp_controlledPID_ZNandCC_0001continuos.time, resp_controlled_PID_CC_continuos_T0001, 'k')
-title('Reposta malha fechada com PID continuo sintonia ZN x CC p/ T=0.001s');
-legend('Ziegler-Nichols', 'Cohen-Coon');
-hold off
-
-%%%<Plotando os atraves da Figura 3>
-figure(3)
-%Sintonizado por ZN
-plot(resp_controlledPID_ZNandCC_01continuos.time, resp_controlled_PID_ZN_continuos_T01, 'g')
-hold on
-%Sintonizado por CC
-plot(resp_controlledPID_ZNandCC_01continuos.time, resp_controlled_PID_CC_continuos_T01, 'k')
-title('Reposta malha fechada com PID continuo sintonia ZN x CC p/ T=0.1s');
+plot(resp_controlledPID_ZNandCC_continuos.time, resp_controlled_PID_CC_continuos, 'k')
+title('Reposta malha fechada com PID continuo sintonia ZN x CC');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 hold off
 
@@ -162,7 +151,7 @@ Temporal para o controle PID continuo sintonizado pelo metodo de
 Ziegles-Nichols e Cohen-Coon.
 %}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% T =0,001 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ERROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Declaracao das variaveis para calculo do somatorio dos erros
 Ezn_a = 0; Ecc_a = 0;
 Ezn_at = 0; Ecc_at = 0;
@@ -170,22 +159,22 @@ Ezn_q = 0; Ecc_q = 0;
 Ezn_qt = 0; Ecc_qt = 0;
 
 %Calculo dos erros
-for i=1:length(resp_controlledPID_ZNandCC_0001continuos.time)
+for i=1:length(resp_controlledPID_ZNandCC_continuos.time)
    %Integral do erro absoluto (IAE)
-   Ezn_a = Ezn_a + abs(1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1));
-   Ecc_a = Ecc_a + abs(1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2));
+   Ezn_a = Ezn_a + abs(1 - resp_controlledPID_ZNandCC_continuos.signals.values(i,1));
+   Ecc_a = Ecc_a + abs(1 - resp_controlledPID_ZNandCC_continuos.signals.values(i,2));
    
    %Integral do erro absoluto ponderado pelo tempo (ITAE)
-   Ezn_at = Ezn_at + abs((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_0001continuos.time(i));
-   Ecc_at = Ecc_at + abs((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_0001continuos.time(i));
+   Ezn_at = Ezn_at + abs((1 - resp_controlledPID_ZNandCC_continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_continuos.time(i));
+   Ecc_at = Ecc_at + abs((1 - resp_controlledPID_ZNandCC_continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_continuos.time(i));
     
    %Integral do erro quadratico (ISE)
-   Ezn_q = Ezn_q + (1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))^2;
-   Ecc_q = Ecc_q + (1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))^2;
+   Ezn_q = Ezn_q + (1 - resp_controlledPID_ZNandCC_continuos.signals.values(i,1))^2;
+   Ecc_q = Ecc_q + (1 - resp_controlledPID_ZNandCC_continuos.signals.values(i,2))^2;
    
    %Integral do erro quadratico ponderado pelo tempo (ITSE)
-   Ezn_qt = Ezn_qt + ((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_0001continuos.time(i))^2;
-   Ecc_qt = Ecc_qt + ((1 - resp_controlledPID_ZNandCC_0001continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_0001continuos.time(i))^2;
+   Ezn_qt = Ezn_qt + ((1 - resp_controlledPID_ZNandCC_continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_continuos.time(i))^2;
+   Ecc_qt = Ecc_qt + ((1 - resp_controlledPID_ZNandCC_continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_continuos.time(i))^2;
 end
 
 Erros = [Ezn_a Ecc_a
@@ -198,48 +187,7 @@ Erros = [Ezn_a Ecc_a
 figure(4)
 bar(Erros);
 xNames = {'Absoluto';'Absoluto Temporal';'Quadrático';'Quadrático Temporal'};
-title('Somatório dos Erros p/ T=0.001s');
-legend('Ziegler-Nichols', 'Cohen-Coon');
-set(gca,'xticklabel',xNames)
-hold off
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% T =0,1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Declaracao das variaveis para calculo do somatorio dos erros
-Ezn_a = 0; Ecc_a = 0;
-Ezn_at = 0; Ecc_at = 0;
-Ezn_q = 0; Ecc_q = 0;
-Ezn_qt = 0; Ecc_qt = 0;
-
-%Calculo dos erros
-for i=1:length(resp_controlledPID_ZNandCC_01continuos.time)
-   %Integral do erro absoluto (IAE)
-   Ezn_a = Ezn_a + abs(1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,1));
-   Ecc_a = Ecc_a + abs(1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,2));
-   
-   %Integral do erro absoluto ponderado pelo tempo (ITAE)
-   Ezn_at = Ezn_at + abs((1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_01continuos.time(i));
-   Ecc_at = Ecc_at + abs((1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_01continuos.time(i));
-    
-   %Integral do erro quadratico (ISE)
-   Ezn_q = Ezn_q + (1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,1))^2;
-   Ecc_q = Ecc_q + (1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,2))^2;
-   
-   %Integral do erro quadratico ponderado pelo tempo (ITSE)
-   Ezn_qt = Ezn_qt + ((1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,1))*resp_controlledPID_ZNandCC_01continuos.time(i))^2;
-   Ecc_qt = Ecc_qt + ((1 - resp_controlledPID_ZNandCC_01continuos.signals.values(i,2))*resp_controlledPID_ZNandCC_01continuos.time(i))^2;
-end
-
-Erros = [Ezn_a Ecc_a
-        Ezn_at Ecc_at
-        Ezn_q  Ecc_q
-        Ezn_qt Ecc_qt];
-    
-%%%<Plotando os atraves da Figura 4>
-%%%Erros acumulativos por 4 metodos de diferentes
-figure(5)
-bar(Erros);
-xNames = {'Absoluto';'Absoluto Temporal';'Quadrático';'Quadrático Temporal'};
-title('Somatório dos Erros p/ T=0.1s');
+title('Somatório dos Erros');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 set(gca,'xticklabel',xNames)
 hold off
@@ -257,10 +205,10 @@ G_controller_zn = tf([kp_ZN+kd_ZN 20*kp_ZN+ki_ZN 20*ki_ZN],[1 20 0]);
 G_controller_cc = tf([kp_CC+kd_CC 20*kp_CC+ki_CC 20*ki_CC],[1 20 0]);
 
 %Discretizacao do controlador G(z) pelo metodo de Tustin
-Gcontroller_discreetizedTUSTIN_T01_controller_zn = c2d(G_controller_zn, 0.1, 'Tustin');
-Gcontroller_discreetizedTUSTIN_T0001_controller_zn = c2d(G_controller_zn, 0.001, 'Tustin');
-Gcontroller_discreetizedTUSTIN_T01_controller_cc = c2d(G_controller_cc, 0.1, 'Tustin');
-Gcontroller_discreetizedTUSTIN_T0001_controller_cc = c2d(G_controller_cc, 0.001, 'Tustin');
+Gcontroller_discreetizedTUSTIN_T01_controller_zn = c2d(G_controller_zn, 0.1, 'Tustin')
+Gcontroller_discreetizedTUSTIN_T0001_controller_zn = c2d(G_controller_zn, 0.001, 'Tustin')
+Gcontroller_discreetizedTUSTIN_T01_controller_cc = c2d(G_controller_cc, 0.1, 'Tustin')
+Gcontroller_discreetizedTUSTIN_T0001_controller_cc = c2d(G_controller_cc, 0.001, 'Tustin')
 
 %Chamando o diagrama de bloco que aplica os PID's discretos na planta cada
 %cada frequencia diferente
@@ -292,8 +240,3 @@ plot(resp_controlledPID_ZNandCC_0001discret.time, resp_controlled_PID_CC_discret
 title('Reposta malha fechada com PID discreto sintonia ZN x CC p/ T=0.001s');
 legend('Ziegler-Nichols', 'Cohen-Coon');
 hold off
-
-
-
-
-

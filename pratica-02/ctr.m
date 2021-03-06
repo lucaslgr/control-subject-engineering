@@ -65,13 +65,13 @@ K = (y_real(end) - y_real(1))/(input.signals.values(end) - 0);
 %(28,3%) e amp_63(63,2%)
 for i=1:length(y_real)
     if((y_real(i)>=amp_28) && flag_amp_28_found == false)
-        t1_28 = x_real(i)
-        y_real(i)
+        t1_28 = x_real(i);
+        y_real(i);
         flag_amp_28_found = true;
     end
     if((y_real(i)>=amp_63) && flag_amp_63_found == false)
-        t2_63 = x_real(i)
-        y_real(i)
+        t2_63 = x_real(i);
+        y_real(i);
         flag_amp_63_found = true;
     end
 end

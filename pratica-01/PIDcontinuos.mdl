@@ -1,5 +1,5 @@
 Model {
-  Name			  "PIDcontinuos_0001"
+  Name			  "PIDcontinuos"
   Version		  8.5
   MdlSubVersion		  0
   SavedCharacterEncoding  "windows-1252"
@@ -7,7 +7,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.12"
+    ComputedModelVersion    "1.13"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "PIDcontinuos_0001"
+      Cell		      "PIDcontinuos"
       PropName		      "mdlProps"
     }
   }
@@ -76,9 +76,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "guima"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sun Feb 07 11:13:08 2021"
-  RTWModifiedTimeStamp	  534593321
-  ModelVersionFormat	  "1.%<AutoIncrement:12>"
+  LastModifiedDate	  "Sat Mar 06 09:53:17 2021"
+  RTWModifiedTimeStamp	  536925195
+  ModelVersionFormat	  "1.%<AutoIncrement:13>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -891,7 +891,7 @@ Model {
     }
   }
   System {
-    Name		    "PIDcontinuos_0001"
+    Name		    "PIDcontinuos"
     Location		    [1426, 171, 2746, 955]
     Open		    on
     ModelBrowserVisibility  off
@@ -1117,7 +1117,7 @@ Model {
       Ports		      [1]
       Position		      [650, 75, 880, 115]
       ZOrder		      24
-      VariableName	      "resp_controlledPID_ZNandCC_0001continuos"
+      VariableName	      "resp_controlledPID_ZNandCC_continuos"
       MaxDataPoints	      "inf"
       SaveFormat	      "Structure With Time"
       Save2DSignal	      "3-D array (concatenate along third dimension)"
