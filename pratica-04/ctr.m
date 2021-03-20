@@ -43,12 +43,13 @@ frequency_cutoff = ceil(N/2); %frequencia de corte
 figure
 hold on
 stem(frequency(1:frequency_cutoff), abs(Yjw), 'k')
-set(gca, 'xtick', 0:1:20);
+set(gca, 'xtick', 0:1:50);
+set(gca, 'ytick', 0:0.1:1.6);
 grid on
 grid minor
 xlabel('Harmônicos')
 ylabel('Amplitudes')
-axis([0 20 0 1.6])
+axis([0 50 0 1.6])
 hold off
 %==========================================================================
 %============================= QUESTAO 2 ==================================
@@ -59,28 +60,36 @@ hold off
 %%
 figure
 hold on
-%calculando o valor médio
 t = [0:0.001:1];
+%inserindo o sinal de saída IDEAL para o relé ideal
+
+plot(t,[2*ones(1,ceil(length(t)/2)-1) 1*ones(1,ceil(length(t)/2))], 'k--');
+%plot(t(ceil(length(t)/2)-1:ceil(length(t)/2)),[2 1],'k--');
+%plot(t(ceil(length(t)/2):length(t)),1*ones(1,ceil(length(t)/2)),'k--');
+
+%calculando o valor médio
 f0 = Yjw(1);
-number_of_harmonics = 7;
+number_of_harmonics = 50;
 number_of_harmonics = number_of_harmonics + 1;
 
 harmonics_function =  abs(f0*ones(1,length(t))); %valor medio
-plot(t,harmonics_function);
-legends = {'Valor Médio'};
+plot(t,harmonics_function, 'r-');
+legends = {'Relé Ideal', 'Valor Médio'};
 
 for N=2:number_of_harmonics
     %harmonics_function = harmonics_function + real(Yjw(N))*cos(2*pi*1*(N-1)*t) + imag(Yjw(N))*sin(2*pi*1*(N-1)*t);
     current_harmonic = abs(Yjw(N))*cos(t*2*pi*f_h*(N-1) + angle(Yjw(N)));
     if(abs(Yjw(N)) >= 0.01)
-        legends{N} = strcat(num2str(N-1),'º Harmônico');
+        %legends{N + 1} = strcat(num2str(N-1),'º Harmônico');
     else
-        legends{N} = strcat(num2str(N-1),'º Harmônico = ZERO');
+        %legends{N + 1} = strcat(num2str(N-1),'º Harmônico = ZERO');
     end
     %plot(t,current_harmonic)
     harmonics_function = harmonics_function + current_harmonic;
-    plot(t,harmonics_function)
+    %plot(t,harmonics_function)
 end
+legends{end + 1} = 'Sinal de n até 50º harmônico';
+plot(t,harmonics_function)
 legend(legends);
 hold off
 %==========================================================================
