@@ -27,9 +27,10 @@ ylabel('Temperatura(ºC)')
 title('Curva de Reação da Planta - Esfriando')
 hold off
 
-[K1, T1, L1] = methodIdentificationSmith(filteredDataHeating.temperatureY, filteredDataHeating.timeX)
-[K2, T2, L2] = methodIdentificationSmith(filteredDataCoolingDown.temperatureY, filteredDataCoolingDown.timeX)
+%calculando as constantes para encontrar a G(s) aproximada da planta pelo
+%metodo de SMITH aplicado a curva ded reacao
+%[K1_SK, Tau1_SK, L1_SK] = methodIdentificationSK(filteredDataHeating.temperatureY, filteredDataHeating.timeX, 0, 100, 0.5)
+%[K2_SK, Tau2_SK, L2_SK] = methodIdentificationSK(filteredDataCoolingDown.temperatureY, filteredDataCoolingDown.timeX, 0, 100, 0.5)
 
-
-
-
+[K1, Tau1, L1] = methodIdentificationSmith(filteredDataHeating.temperatureY, filteredDataHeating.timeX, 0, 1, 2)
+[K2, Tau2, L2] = methodIdentificationSmith(filteredDataCoolingDown.temperatureY, filteredDataCoolingDown.timeX, 0, 1, 2)
